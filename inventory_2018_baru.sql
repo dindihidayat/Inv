@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2018 at 09:36 AM
--- Server version: 10.1.25-MariaDB
+-- Generation Time: 23 Jun 2018 pada 19.06
+-- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `distribusi`
+-- Struktur dari tabel `distribusi`
 --
 
 CREATE TABLE `distribusi` (
@@ -39,18 +39,16 @@ CREATE TABLE `distribusi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `distribusi`
+-- Dumping data untuk tabel `distribusi`
 --
 
 INSERT INTO `distribusi` (`id_distribusi`, `tgl_bast_u`, `no_bast_u`, `id_barang`, `qty`, `satuan`, `penerima`) VALUES
-(5, '2018-06-08', '6789', 98, 1, NULL, 'Dindi'),
-(6, '2018-06-08', '6789', 98, 1, NULL, 'Dindi'),
-(7, '2018-06-08', '6789', 100, NULL, NULL, 'Dindi');
+(8, '2018-06-19', 'NO02930', 103, 10, NULL, 'Dindi');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `groups`
+-- Struktur dari tabel `groups`
 --
 
 CREATE TABLE `groups` (
@@ -60,7 +58,7 @@ CREATE TABLE `groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `groups`
+-- Dumping data untuk tabel `groups`
 --
 
 INSERT INTO `groups` (`id`, `name`, `description`) VALUES
@@ -70,7 +68,7 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hasilstokopname`
+-- Struktur dari tabel `hasilstokopname`
 --
 
 CREATE TABLE `hasilstokopname` (
@@ -87,7 +85,7 @@ CREATE TABLE `hasilstokopname` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `hasilstokopname`
+-- Dumping data untuk tabel `hasilstokopname`
 --
 
 INSERT INTO `hasilstokopname` (`id`, `kodebarang`, `namabarang`, `jmlfisik`, `jmlprogram`, `selisih`, `tglopname`, `waktu`, `pic`, `no_opname`) VALUES
@@ -97,7 +95,7 @@ INSERT INTO `hasilstokopname` (`id`, `kodebarang`, `namabarang`, `jmlfisik`, `jm
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logbarang`
+-- Struktur dari tabel `logbarang`
 --
 
 CREATE TABLE `logbarang` (
@@ -115,7 +113,7 @@ CREATE TABLE `logbarang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login_attempts`
+-- Struktur dari tabel `login_attempts`
 --
 
 CREATE TABLE `login_attempts` (
@@ -125,17 +123,10 @@ CREATE TABLE `login_attempts` (
   `time` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `login_attempts`
---
-
-INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
-(1, '::1', 'admin@admin.coms', 1528355989);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lokasi`
+-- Struktur dari tabel `lokasi`
 --
 
 CREATE TABLE `lokasi` (
@@ -145,7 +136,7 @@ CREATE TABLE `lokasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `lokasi`
+-- Dumping data untuk tabel `lokasi`
 --
 
 INSERT INTO `lokasi` (`id`, `kode`, `lokasi`) VALUES
@@ -153,12 +144,13 @@ INSERT INTO `lokasi` (`id`, `kode`, `lokasi`) VALUES
 (2, 'GD02', 'Gudang 2'),
 (3, 'GD03', 'Gudang 3'),
 (4, 'LM01', 'Lemari 1'),
-(5, 'LM02', 'Lemari 2');
+(5, 'LM02', 'Lemari 2'),
+(6, 'LM03', 'Lemari Komputer');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mst_barang`
+-- Struktur dari tabel `mst_barang`
 --
 
 CREATE TABLE `mst_barang` (
@@ -174,23 +166,26 @@ CREATE TABLE `mst_barang` (
   `kodebarang` varchar(40) DEFAULT NULL,
   `status_barang` varchar(2) DEFAULT NULL,
   `qty_datang` int(11) DEFAULT NULL,
-  `ket` enum('sebagian','full','belum_datang') DEFAULT NULL
+  `ket` enum('sebagian','full','belum_datang') DEFAULT NULL,
+  `pengajuan` enum('1','0') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mst_barang`
+-- Dumping data untuk tabel `mst_barang`
 --
 
-INSERT INTO `mst_barang` (`id_barang`, `nama`, `satuan`, `spesifikasi`, `id_lokasi`, `gambar`, `sumber_dana`, `quantity`, `harga`, `kodebarang`, `status_barang`, `qty_datang`, `ket`) VALUES
-(98, 'Xiaomi', 'Unit', 'C922 PRO STREAM WEBCAM FULL HD 1080P AT 30FPS / 720P AT 60FPS STREAMING \r\nCUSTOMIZABLE BACKGROUND REPLACEMENT \r\nAUTOMATIC LOW LIGHT CORRECTION \r\nMicrophones  \r\nUSB 2.0 \r\n \r\nGaransi min 1 tahun', 1, 'bare_tree_png_by_doloresdevelde-d5f61yl.png', 'RKA', 1, 2308900, '543050064001', '1', 1, 'full'),
-(99, 'kkk', 'Unit', 'Resolusi XGA (1024x768), brighness 3300:1, 2800 Lumen, Garansi minimal 1 tahun', 1, 'angry_bird_png_by_simfonic-d4aps24.png', 'RKA', 4, 7865000, '543050078001', '1', 4, 'full'),
-(100, 'dindi', 'box', '<p>Spesifikasi :Mantab Djiwa</p>\r\n', 1, '180100-dindi.jpg', 'RKA', 10, 1000, '620100', '1', 10, 'full'),
-(101, 'din', 'box', '<p>Spesifikasi :Paling Mantab Djiwa Draga</p>\r\n', 3, '480101-din.jpg', 'RKA', 10, 10000, '370101', '0', 9, 'belum_datang');
+INSERT INTO `mst_barang` (`id_barang`, `nama`, `satuan`, `spesifikasi`, `id_lokasi`, `gambar`, `sumber_dana`, `quantity`, `harga`, `kodebarang`, `status_barang`, `qty_datang`, `ket`, `pengajuan`) VALUES
+(103, 'Processor Core I7 Coffelake 47 Ghz 32mb ', 'Box', '<table class=\"table table-striped table-bordered table-condensed table-hover table-width-full\" width=\"386\">\n<tbody>\n<tr>\n<td colspan=\"3\" width=\"386\"><strong>SPESIFIKASI SINGKAT</strong></td>\n</tr>\n<tr>\n<td width=\"130\"><strong>CPU Name</strong></td>\n<td width=\"127\"><strong>Core i7-8750H</strong></td>\n<td><strong>Core i7-8700</strong></td>\n</tr>\n<tr>\n<td width=\"130\"><strong># of Cores</strong></td>\n<td width=\"127\">6</td>\n<td>6</td>\n</tr>\n<tr>\n<td width=\"130\"><strong># of Threads</strong></td>\n<td width=\"127\">12</td>\n<td>12</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>Base CPU Clock</strong></td>\n<td width=\"127\">2200 MHz</td>\n<td>3200 MHz</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>Turbo – 1 Core</strong></td>\n<td width=\"127\">4200 MHz</td>\n<td>4600 MHz</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>TDP</strong></td>\n<td width=\"127\">45 W</td>\n<td>65 W</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>Unlocked</strong></td>\n<td width=\"127\">NO</td>\n<td>NO</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>L3 Cache (Total)</strong></td>\n<td width=\"127\">9 MB</td>\n<td>12 MB</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>Max. Mem. Speed</strong></td>\n<td width=\"127\">DDR4-2666</td>\n<td width=\"129\">DDR4-2666</td>\n</tr>\n</tbody>\n</table>', 1, NULL, 'RKA', 10, 1401000, 'PRC02910', '1', 10, 'full', '1'),
+(104, 'Processor Core I9 Coffelake 4.9 Ghz 68mb', NULL, '<table class=\"table table-striped table-bordered table-condensed table-hover table-width-full\" width=\"386\">\n<tbody>\n<tr>\n<td colspan=\"3\" width=\"386\"><strong>SPESIFIKASI SINGKAT</strong></td>\n</tr>\n<tr>\n<td width=\"130\"><strong>CPU Name</strong></td>\n<td width=\"127\"><strong>Core i7-8750H</strong></td>\n<td><strong>Core i7-8700</strong></td>\n</tr>\n<tr>\n<td width=\"130\"><strong># of Cores</strong></td>\n<td width=\"127\">6</td>\n<td>6</td>\n</tr>\n<tr>\n<td width=\"130\"><strong># of Threads</strong></td>\n<td width=\"127\">12</td>\n<td>12</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>Base CPU Clock</strong></td>\n<td width=\"127\">2200 MHz</td>\n<td>3200 MHz</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>Turbo – 1 Core</strong></td>\n<td width=\"127\">4200 MHz</td>\n<td>4600 MHz</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>TDP</strong></td>\n<td width=\"127\">45 W</td>\n<td>65 W</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>Unlocked</strong></td>\n<td width=\"127\">NO</td>\n<td>NO</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>L3 Cache (Total)</strong></td>\n<td width=\"127\">9 MB</td>\n<td>12 MB</td>\n</tr>\n<tr>\n<td width=\"130\"><strong>Max. Mem. Speed</strong></td>\n<td width=\"127\">DDR4-2666</td>\n<td width=\"129\">DDR4-2666</td>\n</tr>\n</tbody>\n</table>', 1, NULL, 'RKA', 11, 2100000, 'PRC329000', NULL, NULL, NULL, '1'),
+(105, 'Mantap', 'Satuan', '<p>Spesifikasi :Mantaps</p>\r\n', 2, '', 'RKA', 1, 12000, '940105', NULL, NULL, NULL, '1'),
+(107, 'Xiaomi', 'box', '<p>Spesifikasi :</p>\r\n\r\n<ul>\r\n	<li>Manjay</li>\r\n	<li>mantap djiwa</li>\r\n	<li>lanjay</li>\r\n	<li>fullset</li>\r\n	<li>lecet pemakaian</li>\r\n</ul>\r\n', 1, '740106-Xiaomi.jpg', 'RKA', 10, 21000, '720106', '1', 9, 'full', '1'),
+(108, 'Mekanikal tool kit', 'Set', 'TOOLKIT MECHANICAL W/ALUMUNIUM CASE (59)  \r\nWidth : 32 cmHeight  \r\n Garansi : -', 1, 'ASUS-ROG-Strix-GL553VD.jpg', 'RKA', 1, 1310186, '529010006003', NULL, NULL, NULL, '0'),
+(109, 'Example Item', 'Suej', '', 1, 'paslon_3.jpg', 'RKA', 145, 1000000, '41010201', NULL, NULL, NULL, '1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mst_quantity`
+-- Struktur dari tabel `mst_quantity`
 --
 
 CREATE TABLE `mst_quantity` (
@@ -205,7 +200,45 @@ CREATE TABLE `mst_quantity` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_datang`
+-- Struktur dari tabel `satuan`
+--
+
+CREATE TABLE `satuan` (
+  `id` int(11) NOT NULL,
+  `kode` varchar(10) DEFAULT NULL,
+  `satuan` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `satuan`
+--
+
+INSERT INTO `satuan` (`id`, `kode`, `satuan`) VALUES
+(1, '1', 'Unit'),
+(2, '2', 'Buah'),
+(3, '3', 'Pasang'),
+(4, '4', 'Lembar'),
+(5, '5', 'Keping'),
+(6, '6', 'Batang'),
+(7, '7', 'Bungkus'),
+(8, '8', 'Potong'),
+(9, '9', 'Tablet'),
+(10, '10', 'Ekor'),
+(11, '11', 'Rim'),
+(12, '12', 'Karat'),
+(13, '13', 'Botol'),
+(14, '14', 'Roll'),
+(15, '15', 'Dus'),
+(16, '16', 'Karung'),
+(17, '17', 'Sak'),
+(18, '18', 'Bal'),
+(19, '19', 'Kaleng'),
+(20, '20', 'Gulung');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_datang`
 --
 
 CREATE TABLE `tb_datang` (
@@ -220,23 +253,17 @@ CREATE TABLE `tb_datang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_datang`
+-- Dumping data untuk tabel `tb_datang`
 --
 
 INSERT INTO `tb_datang` (`id_kedatangan`, `no_bst`, `tgl_bst`, `no_po`, `pic`, `id_barang`, `tgl_pengajuan`, `tgl_datang`) VALUES
-(18, 'POPO', '2018-06-06', 'SMKDA', 'Dindi', 99, '0000-11-30', '2018-06-06'),
-(20, '0909', '2018-06-08', '98767', 'Ujang', 100, '2018-06-08', '2018-06-08'),
-(21, NULL, '2018-06-08', NULL, 'Dindi', 100, '2018-06-08', '2018-06-08'),
-(22, NULL, '2018-06-08', NULL, 'Dindi', 101, '2018-06-08', '2018-06-08'),
-(23, NULL, '2018-06-08', NULL, 'Dindi', 98, '2018-06-09', '2018-06-08'),
-(24, NULL, '2018-06-08', NULL, 'Dindi', 99, '2018-06-09', '2018-06-08'),
-(25, NULL, '2018-06-08', NULL, 'Dindi', 100, '2018-06-09', '2018-06-08'),
-(26, NULL, '2018-06-08', NULL, 'Dindi', 101, '2018-06-09', '2018-06-08');
+(30, 'NO123', '2018-06-20', 'OAI23', 'Dindi', 103, '2018-06-20', '2018-06-20'),
+(32, '231AS', '2018-06-21', 'OI23', 'popo', 107, '2018-06-08', '2018-06-21');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pengajuan`
+-- Struktur dari tabel `tb_pengajuan`
 --
 
 CREATE TABLE `tb_pengajuan` (
@@ -249,18 +276,20 @@ CREATE TABLE `tb_pengajuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_pengajuan`
+-- Dumping data untuk tabel `tb_pengajuan`
 --
 
 INSERT INTO `tb_pengajuan` (`id_pengajuan`, `tgl_pengajuan`, `prog_kerja`, `kegiatan`, `id_barang`, `pengajuan`) VALUES
-(53, '2017-08-23 00:00:00', 'Pendidikan', 'Operasional', 99, 'Direktorat Sistem da'),
-(54, '2018-06-08 00:00:00', 'dian', 'dian', 100, NULL),
-(55, '2018-06-08 00:00:00', 'dian', 'dian', 101, NULL);
+(65, '2018-06-18 00:00:00', 'Example', 'Pendidikan', 103, 'Logistik'),
+(66, '2018-06-18 00:00:00', 'Example', 'Pendidikan', 104, 'Logistik'),
+(67, '2018-06-08 00:00:00', 'Kegiatan', 'pendidikan', 107, 'Direktprat Sistem da'),
+(68, '2016-02-15 00:00:00', 'asdo', 'iias', 108, 'SAPPK'),
+(69, '2017-04-05 00:00:00', 'Pendidikan', 'Pengabdian Masyarakat', 109, 'Direktorat Sistem da');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -284,16 +313,16 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, '6CpVPFDxeJcTUJSHZjO52e', 1268889823, 1528439348, 1, 'Admin', 'istrator', 'ADMIN', '0');
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, '20NudoGZK/PVQBeaq0t67.', 1268889823, 1529771043, 1, 'Admin', 'istrator', 'ADMIN', '0');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_groups`
+-- Struktur dari tabel `users_groups`
 --
 
 CREATE TABLE `users_groups` (
@@ -303,7 +332,7 @@ CREATE TABLE `users_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users_groups`
+-- Dumping data untuk tabel `users_groups`
 --
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
@@ -363,6 +392,12 @@ ALTER TABLE `mst_quantity`
   ADD PRIMARY KEY (`id_quantity`);
 
 --
+-- Indexes for table `satuan`
+--
+ALTER TABLE `satuan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_datang`
 --
 ALTER TABLE `tb_datang`
@@ -397,7 +432,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `distribusi`
 --
 ALTER TABLE `distribusi`
-  MODIFY `id_distribusi` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_distribusi` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -417,27 +452,32 @@ ALTER TABLE `logbarang`
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `lokasi`
 --
 ALTER TABLE `lokasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `mst_barang`
 --
 ALTER TABLE `mst_barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+--
+-- AUTO_INCREMENT for table `satuan`
+--
+ALTER TABLE `satuan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `tb_datang`
 --
 ALTER TABLE `tb_datang`
-  MODIFY `id_kedatangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_kedatangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -449,11 +489,11 @@ ALTER TABLE `users`
 ALTER TABLE `users_groups`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `users_groups`
+-- Ketidakleluasaan untuk tabel `users_groups`
 --
 ALTER TABLE `users_groups`
   ADD CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
