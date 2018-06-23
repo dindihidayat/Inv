@@ -17,6 +17,7 @@
 						<label>Tanggal Pengajuan</label>
 						<div class="input-group">
 							<input type="text" name="tanggal" class="form-control datepicker">
+							<input type="hidden" name="page" value="0" class="form-control">
 							<div class="input-group-btn">
 								<button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
 							</div>
@@ -68,6 +69,7 @@
 							<th>Harga</th>
 							<th>Jumlah</th>
 							<th>Sisipkan Gambar</th>
+							<th>Spesifikasi</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -93,6 +95,26 @@
 						              <input type="file" class="custom-file-input" name="gambar<?php echo $no ?>" onchange="getFileData(this,<?php echo $no ?>);">
 						              <label class="custom-file-label labelnya<?php echo $no ?> lab<?php echo $no ?>">Choose file</label>
 						            </div></td>
+						            <td>
+						            	<a class="btn btn-success btn-sm" data-toggle="modal" href='#modal-<?php echo $key->kode_modal ?>'>Spesifikasi</a>
+						            	<div class="modal fade" id="modal-<?php echo $key->kode_modal ?>">
+						            		<div class="modal-dialog">
+						            			<div class="modal-content">
+						            				<div class="modal-header">
+						            					<h4 class="modal-title">Spesifikasi</h4>
+						            					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+						            				</div>
+						            				<div class="modal-body">
+						            					<?php echo $key->spesifikasi ?>
+						            				</div>
+						            				<div class="modal-footer">
+						            					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						            					<button type="button" class="btn btn-primary">Save changes</button>
+						            				</div>
+						            			</div>
+						            		</div>
+						            	</div>
+						            </td>
 								</tr>
 							<?php $no++; endforeach ?>
 						<?php else: ?>
@@ -112,7 +134,7 @@
 			</form>
 		</div>
 	</div>
-
+	<?php echo $this->pagination->create_links() ?>
 	</div>
 </div>
 

@@ -325,7 +325,7 @@
     })
     $(document).on('click','.buat',function()
     {
-      // $('.di').fadeIn('slow');
+      $('.di').fadeIn('slow');
       var tgl_datang = $('.tgl_datang').val();
       var pic = $('.pic')
       var form = $('#forms').serialize();
@@ -337,14 +337,14 @@
         success:function(data)
         {
           console.log(data);
-          // if (data.status == true)
-          // {
-          //   $('.di').fadeOut('slow');
-          //   location.href = '<?php echo base_url('index.php/datang') ?>';
-          // }else{
-          //   alert('Gagal Saat Menambahkan Data, mohon cek kembali data yang akan diinput.');
-          //   $('.di').fadeOut('slow');
-          // }
+          if (data.status == true)
+          {
+            $('.di').fadeOut('slow');
+            location.href = '<?php echo base_url('index.php/datang') ?>';
+          }else{
+            alert('Gagal Saat Menambahkan Data, mohon cek kembali data yang akan diinput.');
+            $('.di').fadeOut('slow');
+          }
         }
       })
     })

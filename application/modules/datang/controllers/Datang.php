@@ -80,10 +80,10 @@ class Datang extends MX_Controller {
         $datang = array();
         foreach ($count as $key => $value) {
             if ($_POST['count'][$key] == 1) {
-            $datang[] = array('no_bst'=>$this->input->post('no_bst'),
+            $datang[] = array('no_bst'=>$this->input->post('nobast'),
                                 'tgl_bst'=>$this->input->post('tgl_datang'),
                                 'tgl_datang'=>$this->input->post('tgl_datang'),
-                                'no_po'=>$this->input->post('no_po'),
+                                'no_po'=>$this->input->post('nopo'),
                                 'pic'=>$this->input->post('pic'),
                                 'id_barang'=>$_POST['id_barang'][$key],
                                 'tgl_pengajuan'=>$this->input->post('tgl_pengajuan'));

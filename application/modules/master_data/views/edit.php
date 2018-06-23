@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<form class="card" action="<?php echo base_url('index.php/master_data/action'); ?>" method="post" enctype="multipart/form-data">
     <div class="card-body">
-      <h3 class="card-title">Tambah Data Master Barang</h3>
+      <h3 class="card-title">Edit Data Master Barang</h3>
       <div class="row">
         <div class="col-md-12">
          <label class="custom-checkbox">
@@ -20,7 +20,7 @@
         <div class="col-sm-6 col-md-6">
           <div class="form-group">
             <label class="form-label">Nama Barang</label>
-            <input type="text" class="form-control" placeholder="Nama Barang" name="nama">
+            <input type="text" class="form-control" placeholder="Nama Barang" name="nama" value="<?php echo $data->nama ?>">
           </div>
         </div>
         <div class="col-sm-6 col-md-6">

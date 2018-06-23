@@ -18,6 +18,16 @@ class Masterdata_model extends CI_Model {
 			return $query;
 		}
 	}
+	function getSatuan()
+	{
+		$this->db->order_by('satuan', 'asc');
+		return $this->db->get('satuan');
+	}
+	function edit($id)
+	{
+		$this->db->where('id_barang', $id);
+		return $this->db->get('mst_barang')->row();
+	}
 	function jumlah_data($cari,$lokasi,$sumber_dana){
 		if (!empty($cari) || !empty($lokasi) || !empty($sumber_dana)) {
 			$this->db->like('nama', $cari, 'BOTH');

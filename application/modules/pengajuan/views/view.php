@@ -9,6 +9,26 @@
     <?php endif ?>
     <div class="card">
       <!-- <div class="table-responsive"> -->
+        <div class="pull-right">
+        <div class="col-md-6">
+          <form action="<?php echo base_url('index.php/pengajuan') ?>" method="get" accept-charset="utf-8">
+            <div class="form-group">
+              <div class="input-group">
+                <select name="tahun" class="form-control">
+                  <option value="">Tahun</option>
+                  <option value="2018">2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                </select>
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        </div>
         <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
           <thead>
             <tr>

@@ -14,11 +14,18 @@ class Pengajuan extends MX_Controller {
         {
             redirect(base_url('index.php/auth'));
         }
-    		$jumlah_data = $this->pengajuan_model->jumlah_data();
+            $tahun = 0;
+            $tahun = $this->input->get('tahun');
+            $jumlah_data = $this->pengajuan_model->jumlah_data();
             $config['base_url'] = site_url('index.php').'/pengajuan/index/';
             $config['total_rows'] = $jumlah_data;
             $config['per_page'] = 10;
             $from = $this->uri->segment(4);
+            if (!empty($tahun)) {
+                $datanya = $this->pengajuan_model->data($config['per_page'],$from,$tahun);
+            }else{
+                $datanya = $this->pengajuan_model->data($config['per_page'],$from);
+            }
 
             $config['full_tag_open'] = '<ul class="pagination">';
             $config['full_tag_close'] = '</ul>';
@@ -40,7 +47,7 @@ class Pengajuan extends MX_Controller {
             $config['num_tag_close'] = '</li>';
             $this->pagination->initialize($config);
 
-		$this->load->view('template/template',array('template'=>'view','data' => $this->pengajuan_model->data($config['per_page'],$from)));
+		$this->load->view('template/template',array('template'=>'view','data' => $datanya));
 	}
 	public function tambah()
 	{
@@ -56,7 +63,7 @@ class Pengajuan extends MX_Controller {
             $barang = $this->pengajuan_model->getbarangada($kodebarang,$tglpengajuan);
         }
         $tgl_pengajuan = $this->pengajuan_model->gettanggalpengajuan();
-		$this->load->view('template/template',array('template'=>'tambah','lokasi'=>$this->pengajuan_model->getlokasi(),'barang'=>$barang,'kodebarang'=>$this->pengajuan_model->getkodebarang(),'tglpengajuanada'=>$tgl_pengajuan));
+		$this->load->view('template/template',array('template'=>'tambah','lokasi'=>$this->pengajuan_model->getlokasi(),'barang'=>$barang,'kodebarang'=>$this->pengajuan_model->getkodebarang(),'tglpengajuanada'=>$tgl_pengajuan,'satuan'=>$this->pengajuan_model->getSatuan()));
 	}
     public function cari_sispran()
     {
@@ -65,11 +72,51 @@ class Pengajuan extends MX_Controller {
             redirect(base_url('index.php/auth'));
         }
         $barang = '';
+        $jml = 0;
         $tanggal = $this->input->get('tanggal');
         $barang_cari = $this->input->get('barang');
-        if (!empty($tanggal) || !empty($barang_cari)) {
-            $barang = $this->pengajuan_model->sispran($tanggal,$barang_cari);
+        $page = $this->input->get('page');
+        $offset = 0;
+        if (!empty($page)) {
+            $offset = $page;
+        }else{
+            $offset = 0;
         }
+        $config['base_url'] = site_url('index.php').'/pengajuan/cari_sispran?barang='.$barang.'&tanggal='.$tanggal;
+        $config['per_page'] = 10;
+        $from = $page;
+        if (!empty($tanggal) || !empty($barang_cari)) {
+            $barang = $this->pengajuan_model->sispran($tanggal,$barang_cari,$config['per_page'],$offset);
+            $jml = $this->pengajuan_model->jml_sispran($tanggal,$barang_cari);
+        }
+
+        $config['total_rows'] = $jml;
+        $config['uri_protocol'] = "QUERY_STRING";
+        $config['enable_query_strings'] = TRUE;
+        $config['page_query_string'] = TRUE;
+        $config['query_string_segment'] = 'page';
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = 'First';
+        $config['last_link'] = 'Last';
+        $config['first_tag_open'] = '<li class="page-item">';
+        $config['first_tag_close'] = '</li>';
+        $config['attributes'] = array('class' => 'page-link');
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li class="page-item">';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active page-item"><a href="#" class="page-link">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+        $this->pagination->initialize($config);
+        // print_r($jml);
+        // print_r($barang);
         $this->load->view('template/template',['template'=>'cari_sispran','dari_sispran'=>$barang]);
     }
     function ajaxget()
@@ -107,6 +154,7 @@ class Pengajuan extends MX_Controller {
                         'satuan' => $_POST['satuan'][$key],
                         'id_lokasi'=>1,
                         'sumber_dana'=>'RKA',
+                        'pengajuan'=>'1',
                         'gambar'=>$data['file_name'],
                         'quantity' => $_POST['volume'][$key],
                         'spesifikasi' => $_POST['spesifikasi'][$key],
@@ -119,6 +167,7 @@ class Pengajuan extends MX_Controller {
                         'satuan' => $_POST['satuan'][$key],
                         'id_lokasi'=>1,
                         'sumber_dana'=>'RKA',
+                        'pengajuan'=>'1',
                         'quantity' => $_POST['volume'][$key],
                         'spesifikasi' => $_POST['spesifikasi'][$key],
                         'harga' => $_POST['harga'][$key]
@@ -271,11 +320,13 @@ class Pengajuan extends MX_Controller {
             }
             // exit();
             $name = $this->input->post('name');
+            $unit = $this->input->post('unit');
             $barang = ['kodebarang'=>$this->pengajuan_model->kode(),
                        'nama'=>$this->input->post('nama_barang'),
                        'satuan'=>$this->input->post('satuan'),
                        'id_lokasi'=>$this->input->post('lokasi'),
                        'gambar'=>$gambar,
+                       'pengajuan'=>1,
                        'sumber_dana'=>$this->input->post('sumber_dana'),
                        'quantity'=>$this->input->post('quantity'),
                        'harga'=>$this->input->post('harga_realisasi'),
@@ -283,7 +334,7 @@ class Pengajuan extends MX_Controller {
                        'status_barang'=>0,
                        'ket'=>'belum_datang' 
                       ];
-                $g = $this->pengajuan_model->insert($name,$barang);
+                $g = $this->pengajuan_model->insert($name,$barang,$unit);
                 // print_r($g);
                 if ($g) {
                         $this->session->flashdata('status',true);

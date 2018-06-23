@@ -96,13 +96,19 @@
         <div class="col-sm-6 col-md-3">
           <div class="form-group">
             <label class="form-label">Pengajuan Oleh</label>
-            <select name="name[pengajuan]" class="form-control">
+            <select name="name[pengajuan]" class="form-control unit">
               <option value="logistik">Logistik</option>
               <option value="unit">Unit</option>
             </select>
             <small class="text-danger">
                 <strong><?php echo form_error('name[pengajuan]'); ?></strong>
             </small>
+          </div>
+        </div>
+        <div class="col-md-12 showunit">
+          <div class="form-group">
+            <label class="form-label">Unit</label>
+            <input type="text" class="form-control" name="unit" placeholder="Unit">
           </div>
         </div>
         <div class="col-sm-6 col-md-6">
@@ -114,15 +120,20 @@
         <div class="col-sm-6 col-md-6">
           <div class="form-group">
             <label class="form-label">Satuan</label>
-            <select class="form-control" name="satuan">
-            	<option value="box">Box</option>
+            <select class="form-control pilih" name="satuan">
+              <option value="">Satuan</option>
+              <?php if ($satuan->num_rows() > 0): ?>
+                <?php foreach ($satuan->result() as $sat): ?>
+                	<option value="<?php echo $sat->satuan ?>"><?php echo $sat->satuan ?></option>
+                <?php endforeach ?>
+              <?php endif ?>
             </select>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label class="form-label">Lokasi</label>
-           <select class="form-control" name="lokasi">
+           <select class="form-control pilih" name="lokasi">
             <option value="">Lokasi</option>
             <?php if ($lokasi->num_rows() > 0): ?>
               <?php foreach ($lokasi->result() as $value): ?>
@@ -198,14 +209,23 @@
   </div>
 </div>
 
-
 <script>
   $(document).ready(function()
   {
+    $('.pilih').select2();
     $('.yangada').hide();
+    $('.showunit').hide();
   })
   $(function()
   {
+    $(document).on('change','.unit',function(){
+      var kode = $(this).val();
+      if (kode == "logistik"){
+        $('.showunit').hide();
+      }else{
+        $('.showunit').show();
+      }
+    })
     $('.check').on('click',function()
     {
       if (this.checked)

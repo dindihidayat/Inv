@@ -20,10 +20,12 @@
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/datepicker.css">
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/dropzone.css">
-    <script src="<?php echo base_url() ?>assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
     <link href="<?php echo base_url() ?>assets/plugins/sweetalert/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="<?php echo base_url() ?>assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/require.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
     <script src="<?php echo base_url()?>assets/plugins/ckeditor/ckeditor.js"></script>
@@ -106,12 +108,12 @@
           <div class="container">
             <div class="row align-items-center">
               <div class="col-lg-3 ml-auto">
-                <form class="input-icon my-3 my-lg-0">
+<!--                 <form class="input-icon my-3 my-lg-0">
                   <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1">
                   <div class="input-icon-addon">
                     <i class="fe fe-search"></i>
                   </div>
-                </form>
+                </form> -->
               </div>
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
@@ -128,7 +130,7 @@
                     <a href="<?php echo base_url('index.php/distribusi') ?>" class="nav-link"><i class="fe fe-home"></i> Distribusi</a>
                   </li>
                   <li class="nav-item">
-                    <a href="./index.html" class="nav-link"><i class="fe fe-home"></i> Lokasi</a>
+                    <a href="<?php echo base_url('index.php/lokasi') ?>" class="nav-link"><i class="fe fe-home"></i> Lokasi</a>
                   </li>
                   <li class="nav-item">
                     <a href="<?php echo base_url('index.php/stockopname') ?>" class="nav-link"><i class="fe fe-home"></i> Stockopname</a>

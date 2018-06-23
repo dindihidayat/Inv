@@ -65,9 +65,13 @@ class Master_data extends MX_Controller {
     {
         redirect(base_url('index.php/auth'));
     }
-    $this->load->view('template/template', ['template'=>'tambah','lokasi'=>$this->Masterdata_model->getlokasi()]);
+    $this->load->view('template/template', ['template'=>'tambah','lokasi'=>$this->Masterdata_model->getlokasi(),'satuan'=>$this->Masterdata_model->getSatuan()]);
   }
-
+  function edit($id)
+  {
+    $g = $this->Masterdata_model->edit($g);
+    $this->load->view('template/template', ['template'=>'edit','data'=>$g]);
+  }
   function action()
   {
     if (!$this->ion_auth->logged_in())

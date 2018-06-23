@@ -64,7 +64,21 @@
 										<?php if ($barang->num_rows() > 0): ?>
 										<?php foreach ($barang->result() as $key): ?>
 											<tr>
-												<td><input type="checkbox" class="form-check check" value="1" data-id="<?php echo $key->id_barang ?>">
+												<td>
+													<?php 
+														$g = $this->Dsitribusi_model->checkdistribusi($key->id_barang);
+														if ($g->num_rows() > 0) {
+															if (($key->quantity - $g->row()->sum_qty) == 0) { ?>
+																<input type="checkbox" class="form-check check" value="0" data-id="<?php echo $key->id_barang ?>">
+							
+															<?php }else{
+																echo '<input type="checkbox" class="form-check check" value="1" data-id="'.$key->id_barang.'">';
+															}
+														}else{
+															echo '<input type="checkbox" class="form-check check" value="1" data-id="'.$key->id_barang.'">';
+														}
+													 ?>
+													 
 												</td>
 												<td><?php echo $key->kodebarang ?></td>
 												<td><?php echo $key->nama ?></td>

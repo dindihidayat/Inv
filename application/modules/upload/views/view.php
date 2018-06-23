@@ -140,7 +140,9 @@
 </style>
 <div class="container-fluid">
 	<div class="row">
-		<h3>Upload Data</h3>
+    <div class="col-md-12">
+  		<h3>Upload Data</h3>
+    </div>
 	</div>
 	<div class="card">
 		<div class="col-md-12">
@@ -150,7 +152,7 @@
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs">
 			<li class="nav-item">
-				<a class="nav-link active" href="#home" aria-controls="home" role="tab" data-toggle="tab">Upload Data Kesini</a>
+				<a class="nav-link active" href="#home" aria-controls="home" role="tab" data-toggle="tab">Upload Data</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#tab" aria-controls="tab" role="tab" data-toggle="tab">Download Template</a>
@@ -160,7 +162,7 @@
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="home">
-				<form id="file-upload-form" class="uploader">
+				<form id="file-upload-form" class="uploader" style="padding:10px 10px 10px 10px">
 				  <input id="file-upload" type="file" name="file"/>
 				  <label for="file-upload" id="file-drag">
 				    <img id="file-image" src="#" alt="Preview" class="hidden">
@@ -181,8 +183,8 @@
 			</div>
 			<div role="tabpanel" class="tab-pane" id="tab">
         <div class="col-md-12" style="padding:10px 10px 10px 10px">
-          <a href="<?php echo base_url() ?>upload/file/JAWA_BARAT-BOGOR-BABAKAN_MADANG-BOJONG_KONENG-MODEL_A.3-KWK(Semua_TPS).xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Pengajuan</a>
-          <a href="<?php echo base_url() ?>upload/file/JAWA_BARAT-BOGOR-BABAKAN_MADANG-BOJONG_KONENG-MODEL_A.3-KWK(Semua_TPS).xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Master Barang</a>
+          <a href="<?php echo base_url() ?>assets/file/template_pengajuan.xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Pengajuan</a>
+          <a href="<?php echo base_url() ?>assets/file/template_Master_barang.xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Master Barang</a>
           <a href="<?php echo base_url() ?>upload/file/JAWA_BARAT-BOGOR-BABAKAN_MADANG-BOJONG_KONENG-MODEL_A.3-KWK(Semua_TPS).xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Barang Datang</a>
           <a href="<?php echo base_url() ?>upload/file/JAWA_BARAT-BOGOR-BABAKAN_MADANG-BOJONG_KONENG-MODEL_A.3-KWK(Semua_TPS).xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Stockopname</a>
         </div>
