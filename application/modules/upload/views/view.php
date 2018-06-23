@@ -144,7 +144,7 @@
   		<h3>Upload Data</h3>
     </div>
 	</div>
-	<div class="card" id="card">
+	<div class="card">
 		<div class="col-md-12">
 			
 
