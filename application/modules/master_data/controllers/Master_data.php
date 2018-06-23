@@ -69,8 +69,8 @@ class Master_data extends MX_Controller {
   }
   function edit($id)
   {
-    $g = $this->Masterdata_model->edit($g);
-    $this->load->view('template/template', ['template'=>'edit','data'=>$g]);
+    $g = $this->Masterdata_model->edit($id);
+    $this->load->view('template/template', ['template'=>'edit','data'=>$g,'satuan'=>$this->Masterdata_model->getSatuan(),'lokasi'=>$this->Masterdata_model->getlokasi()]);
   }
   function action()
   {
@@ -81,15 +81,14 @@ class Master_data extends MX_Controller {
     $gambar = '';
 
     $config['file_name'] = $this->Masterdata_model->kode().'-'.$this->input->post('nama');
-    $config['upload_path'] = './uploads/gambar';
+    $config['upload_path'] = 'upload/gambar';
     $config['allowed_types'] = 'gif|jpg|png';
-    $config['max_size']  = '100';
-    $config['max_width']  = '1024';
-    $config['max_height']  = '768';
+    // $config['max_size']  = '1500';
+
     
     $this->load->library('upload', $config);
     
-    if ( ! $this->upload->do_upload('data')){
+    if ( ! $this->upload->do_upload('gambar')){
             $error = array('error' => $this->upload->display_errors());
     }
     else{
@@ -113,5 +112,49 @@ class Master_data extends MX_Controller {
       $this->tambah();
     }
   }
+  function action_edit()
+  {
+    if (!$this->ion_auth->logged_in())
+    {
+        redirect(base_url('index.php/auth'));
+    }
+    $gambar = '';
 
+    $config['file_name'] = $this->Masterdata_model->kode().'-'.$this->input->post('nama');
+    $config['upload_path'] = 'upload/gambar';
+    $config['allowed_types'] = 'gif|jpg|png';
+
+    
+    $this->load->library('upload', $config);
+    
+    if ( ! $this->upload->do_upload('gambar')){
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+            exit();
+    }
+    else{
+            $data = array('upload_data' => $this->upload->data());
+            $gambar = $data['upload_data']['file_name'];
+            print_r($data);
+            exit();
+    }
+    $id = $this->input->post('idnya');
+    $barang = ['kodebarang'=>$this->Masterdata_model->kode(),
+       'nama'=>$this->input->post('nama'),
+       'satuan'=>$this->input->post('satuan'),
+       'id_lokasi'=>$this->input->post('lokasi'),
+       'gambar'=>$gambar,
+       'pengajuan'=>$this->input->post('pengajuan'),
+       'sumber_dana'=>$this->input->post('sumber_dana'),
+       'quantity'=>$this->input->post('quantity'),
+       'harga'=>$this->input->post('harga_realisasi'),
+       'spesifikasi'=>$this->input->post('spesifikasi'),
+      ];
+    $g = $this->Masterdata_model->update($id,$barang);
+    if ($g){
+           redirect(base_url('index.php/master_data'),'refresh');
+    }else{
+      $this->tambah();
+    }
+  }
 }

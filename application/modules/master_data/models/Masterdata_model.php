@@ -77,6 +77,19 @@ class Masterdata_model extends CI_Model {
 			return false;
 		}
 	}
+	function update($id,$barang)
+	{
+		$this->db->trans_begin();
+		$this->db->where('id_barang',$id);
+		$this->db->update('mst_barang',$barang);
+		if ($this->db->trans_status()) {
+			$this->db->trans_commit();
+			return true;
+		}else{
+			$this->db->trans_rollback();
+			return false;
+		}
+	}
 
 }
 

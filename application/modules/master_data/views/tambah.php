@@ -71,8 +71,8 @@
           <div class="form-group">
             <label class="form-label">Gambar</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="gambar">
-              <label class="custom-file-label">Choose file</label>
+              <input type="file" class="custom-file-input" name="gambar" onchange="getFileData(this)">
+              <label class="custom-file-label labelnya">Choose file</label>
             </div>
           </div>
         </div>
@@ -125,4 +125,10 @@
          }
         })
   })
+  function getFileData(myFile){
+   var file = myFile.files[0];  
+   var filename = file.name;
+   $('.labelnya').text(filename);
+   // console.log(filename);
+  }
 </script>

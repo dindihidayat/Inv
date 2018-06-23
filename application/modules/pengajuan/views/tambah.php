@@ -311,5 +311,5 @@
    var filename = file.name;
    $('.labelnya').text(filename);
    // console.log(filename);
-}
+  }
 </script>

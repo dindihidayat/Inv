@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<form class="card" action="<?php echo base_url('index.php/master_data/action'); ?>" method="post" enctype="multipart/form-data">
+	<form class="card" action="<?php echo base_url('index.php/master_data/action_edit'); ?>" method="post" enctype="multipart/form-data">
     <div class="card-body">
       <h3 class="card-title">Edit Data Master Barang</h3>
       <div class="row">
@@ -21,6 +21,8 @@
           <div class="form-group">
             <label class="form-label">Nama Barang</label>
             <input type="text" class="form-control" placeholder="Nama Barang" name="nama" value="<?php echo $data->nama ?>">
+            <input type="hidden" class="form-control" name="pengajuan" value="<?php echo $data->pengajuan ?>">
+            <input type="hidden" class="form-control" name="idnya" value="<?php echo $data->id_barang ?>">
           </div>
         </div>
         <div class="col-sm-6 col-md-6">
@@ -30,7 +32,7 @@
               <option value="">Satuan</option>
               <?php if ($satuan->num_rows() > 0): ?>
                 <?php foreach ($satuan->result() as $sat): ?>
-                  <option value="<?php echo $sat->satuan ?>"><?php echo $sat->satuan ?></option>
+                  <option value="<?php echo $sat->satuan ?>" <?php if($data->satuan == $sat->satuan){echo "selected";} ?>><?php echo $sat->satuan ?></option>
                 <?php endforeach ?>
               <?php endif ?>
             </select>
@@ -43,7 +45,7 @@
             <option>Lokasi</option>
             <?php if ($lokasi->num_rows() > 0): ?>
               <?php foreach ($lokasi->result() as $key): ?>
-                <option value="<?php echo $key->id ?>"><?php echo $key->lokasi ?></option>
+                <option value="<?php echo $key->id ?>" <?php if($data->id_lokasi == $sat->id){echo "selected";} ?>><?php echo $key->lokasi ?></option>
               <?php endforeach ?>
             <?php endif ?>
            </select>
@@ -52,27 +54,27 @@
         <div class="col-sm-6 col-md-4">
           <div class="form-group">
             <label class="form-label">Sumber Dana</label>
-            <input type="text" class="form-control" placeholder="Sumber Dana" name="sumber_dana">
+            <input type="text" class="form-control" placeholder="Sumber Dana" name="sumber_dana" value="<?php echo $data->sumber_dana ?>">
           </div>
         </div>
         <div class="col-sm-6 col-md-3">
           <div class="form-group">
             <label class="form-label">Quantity</label>
-            <input type="number" class="form-control" placeholder="Quantity" name="quantity">
+            <input type="number" class="form-control" placeholder="Quantity" name="quantity" value="<?php echo $data->quantity ?>">
           </div>
         </div>
         <div class="col-sm-6 col-md-3">
           <div class="form-group">
             <label class="form-label">Harga Realisasi</label>
-            <input type="number" class="form-control" placeholder="Harga Realisasi" name="harga_realisasi">
+            <input type="number" class="form-control" placeholder="Harga Realisasi" name="harga_realisasi" value="<?php echo $data->harga ?>">
           </div>
         </div>
         <div class="col-md-2">
           <div class="form-group">
             <label class="form-label">Gambar</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="gambar">
-              <label class="custom-file-label">Choose file</label>
+              <input type="file" class="custom-file-input" name="gambar" onchange="getFileData(this);">
+              <label class="custom-file-label labelnya">Choose file</label>
             </div>
           </div>
         </div>
@@ -82,6 +84,7 @@
             <!-- <textarea rows="5" class="form-control" placeholder="Spesifikasi"></textarea> -->
              <textarea id="editor1" name="spesifikasi" rows="10" cols="80">
                 Spesifikasi :
+                <?php echo $data->spesifikasi ?>
               </textarea>
           </div>
         </div>
@@ -125,4 +128,10 @@
          }
         })
   })
+  function getFileData(myFile){
+   var file = myFile.files[0];  
+   var filename = file.name;
+   $('.labelnya').text(filename);
+   // console.log(filename);
+  }
 </script>
