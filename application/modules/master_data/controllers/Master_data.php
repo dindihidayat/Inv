@@ -122,7 +122,7 @@ class Master_data extends MX_Controller {
 
     $config['file_name'] = $this->Masterdata_model->kode().'-'.$this->input->post('nama');
     $config['upload_path'] = 'upload/gambar';
-    $config['allowed_types'] = 'gif|jpg|png';
+    $config['allowed_types'] = 'gif|jpg|png|jpeg';
 
     
     $this->load->library('upload', $config);
