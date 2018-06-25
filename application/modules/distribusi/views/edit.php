@@ -150,7 +150,7 @@
 				})
 			}else{
 				$.ajax({
-					url:"<?php echo base_url('index.php/distribusi/simpan') ?>",
+					url:"<?php echo base_url('index.php/distribusi/simpan_edit') ?>",
 					method:"post",
 					data:new FormData(this),
 					dataType:"JSON",
@@ -161,8 +161,8 @@
 					{
 						if (data.status == true)
 						{
-							// console.log(data);
-							location.href ='<?php echo base_url('index.php/distribusi') ?>';
+							console.log(data);
+							// location.href ='<?php echo base_url('index.php/distribusi') ?>';
 						}else{
 							alert('Gagal Menambahkan Data');
 						}

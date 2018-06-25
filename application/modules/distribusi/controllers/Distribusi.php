@@ -49,7 +49,7 @@ class Distribusi extends CI_Controller {
 				);
 			}
 		}
-		$g = $this->Dsitribusi_model->insert('distribusi',$obj);
+		$g = $this->Dsitribusi_model->insert('distribusi',$obj,'insert');
 		if ($g) {
 			echo json_encode(array('status'=>true,'data'=>$obj));
 		}else{
@@ -64,6 +64,7 @@ class Distribusi extends CI_Controller {
         }
         $obj = array();
 		$count = $this->input->post('count');
+		$tgl = $this->input->post('tgl_old');
 		foreach ($count as $key => $value) {
 			if ($_POST['count'][$key] == 1) {
 				$obj[] = array('tgl_bast_u'=>$this->input->post('tgl_bast_u'),
@@ -74,7 +75,8 @@ class Distribusi extends CI_Controller {
 				);
 			}
 		}
-		$g = $this->Dsitribusi_model->insert('distribusi',$obj);
+		echo json_encode($obj);/
+		$g = $this->Dsitribusi_model->insert('distribusi',$obj,'update',$tgl);
 		if ($g) {
 			echo json_encode(array('status'=>true,'data'=>$obj));
 		}else{

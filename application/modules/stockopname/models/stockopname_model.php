@@ -65,11 +65,31 @@ class Stockopname_model extends CI_Model {
 		$kodejadi = mt_rand(10,100).$kodemax; 
 		return $kodejadi;  
 	}
-	function insert($tabel,$object)
+	function insert($tabel,$object = array())
 	{
-		return $this->db->insert($tabel, $object);
+		$this->db->trans_begin();
+		return $this->db->insert_batch($tabel, $object);
+		if (!$this->db->trans_status() === false) {
+			$this->db->trans_rollback();
+			return false;
+		}else{
+			$this->db->trans_commit();
+			return true;
+		}
 	}
-
+	function hapus($id)
+	{
+		$this->db->trans_start();
+		$this->db->where('tglopname', $id);
+		$this->db->delete('hasilstokopname');
+		if ($this->db->trans_status()) {
+			$this->db->trans_commit();
+			return true;
+		}else{
+			$this->db->trans_rollback();
+			return false;
+		}
+	}
 }
 
 /* End of file stockopname_model.php */

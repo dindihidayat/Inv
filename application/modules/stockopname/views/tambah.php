@@ -50,7 +50,7 @@
 				<hr>
 			</div>
 			</form>
-			<form id="form">
+			<form id="simpan_opname" action="" method="post" >
 			<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -75,7 +75,7 @@
 					<label>&nbsp;</label>
 					<div class="input-group">
 						<div class="input-group-btn">
-							<button type="button" class="btn btn-success simpan_opname"><i class="fa fa-save"></i> Simpan</button>
+							<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
 						</div>
 					</div>
 				</div>
@@ -149,9 +149,9 @@
 	$(function()
 	{
 		$('.datepicker').datepicker({format:"yyyy-mm-dd"});
-		$(document).on('click','.simpan_opname',function()
+		$('#simpan_opname').on('submit',function(e)
 		{
-
+			e.preventDefault();
 			var tanggal = $('.tgl_opname').val();
 			var pic = $('.pic').val();
 			var no_opname = $('.no_opname').val();
@@ -160,9 +160,12 @@
 			}else{	
 				$.ajax({
 					url:"<?php echo base_url('index.php/stockopname/save_opname') ?>",
-					data:$('#form').serialize(),
+					data: new FormData(this), 
 					method:"POST",
 					dataType:"JSON",
+					contentType: false,
+					cache: false,
+					processData:false,
 					success:function(data)
 					{
 						if (data.status == true)

@@ -56,10 +56,17 @@ class Dsitribusi_model extends CI_Model {
 		$this->db->join('mst_barang ms', 'ms.id_barang = dis.id_barang', 'left');
 		return $this->db->get('distribusi dis');
 	}
-	function insert($tabel,$obj)
+	function insert($tabel,$obj,$type='',$id='')
 	{
 		$this->db->trans_begin();
-		$this->db->insert_batch($tabel, $obj);
+		if ($type == 'insert') {
+			$this->db->insert_batch($tabel, $obj);
+		}else{
+			$this->db->where('tgl_bast_u', $id);
+			$this->db->delete('distribusi');
+			
+			$this->db->insert_batch('distribusi', $obj);
+		}
 		if ($this->db->trans_status()) {
 			$this->db->trans_commit();
 			return true;
