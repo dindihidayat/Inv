@@ -82,7 +82,7 @@ class Stockopname extends CI_Controller {
 		// exit();
 		$g = $this->stockopname_model->insert('hasilstokopname',$ins);
 		if ($g) {
-			echo json_encode(array('status'=>true));
+			echo json_encode(array('status'=>true,'count'=>count($count)));
 		}else{
 			echo json_encode(array('status'=>false));
 		}

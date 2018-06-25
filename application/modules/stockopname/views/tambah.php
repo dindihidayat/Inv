@@ -181,9 +181,8 @@
 	})
 	function launch_toast() {
 	   swal({
-		  position: 'top-end',
 		  type: 'success',
-		  title: '<i class="fa fa-thumbs-o-up"></i>Berhasil Menyimpan Data Stockopname',
+		  title: 'Berhasil Menyimpan Data Stockopname',
 		  showConfirmButton: false,
 		  timer: 1500
 		})
