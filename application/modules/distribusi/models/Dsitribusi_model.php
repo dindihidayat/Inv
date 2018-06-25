@@ -49,7 +49,13 @@ class Dsitribusi_model extends CI_Model {
 		return $this->db->get('distribusi td');
 	}	
 
-
+	function getedit($tanggal)
+	{
+		$this->db->select('ms.*,dis.*,dis.id_barang as idbarang');
+		$this->db->where('tgl_bast_u', $tanggal);
+		$this->db->join('mst_barang ms', 'ms.id_barang = dis.id_barang', 'left');
+		return $this->db->get('distribusi dis');
+	}
 	function insert($tabel,$obj)
 	{
 		$this->db->trans_begin();

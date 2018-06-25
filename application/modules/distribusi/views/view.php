@@ -25,7 +25,7 @@
 			                      <a href="javascript:void(0)" data-toggle="dropdown" class="icon" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
 			                      <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(15px, 20px, 0px); top: 0px; left: 0px; will-change: transform;">
 			                        <a href="<?php echo base_url('index.php/distribusi/info?no_bast_u='.$key->no_bast_u) ?>" class="dropdown-item text-info"><i class="dropdown-icon fe fe-info text-info"></i> Info </a>
-			                        <a href="<?php echo base_url('index.php/') ?>" class="dropdown-item text-warning"><i class="dropdown-icon fe fe-edit-2 text-warning"></i> Edit </a>
+			                        <a href="<?php echo base_url('index.php/distribusi/edit?tanggal='.$key->tgl_bast_u) ?>" class="dropdown-item text-warning"><i class="dropdown-icon fe fe-edit-2 text-warning"></i> Edit </a>
 			                        <a href="<?php echo base_url('index.php/') ?>" class="dropdown-item text-danger"><i class="dropdown-icon fe fe-trash text-danger"></i> Hapus</a>
 			                        <div class="dropdown-divider"></div>
 			                        <a href="<?php echo base_url('index.php/distribusi/generate_word?no_bast_u='.$key->no_bast_u) ?>" class="dropdown-item text-primary"><i class="dropdown-icon fa fa-file-word-o text-primary"></i>Doc</a>

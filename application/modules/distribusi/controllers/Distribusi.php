@@ -56,6 +56,31 @@ class Distribusi extends CI_Controller {
 			echo json_encode(array('status'=>false,'data'=>$obj));
 		}
 	}
+	function simpan_edit()
+	{
+        if (!$this->ion_auth->logged_in())
+        {
+            redirect(base_url('index.php/auth'));
+        }
+        $obj = array();
+		$count = $this->input->post('count');
+		foreach ($count as $key => $value) {
+			if ($_POST['count'][$key] == 1) {
+				$obj[] = array('tgl_bast_u'=>$this->input->post('tgl_bast_u'),
+							'no_bast_u'=>$this->input->post('no_bast_u'),
+							'id_barang'=>$_POST['id_barang'][$key],
+							'qty'=>$_POST['qty'][$key],
+							'penerima'=>$this->input->post('pic')
+				);
+			}
+		}
+		$g = $this->Dsitribusi_model->insert('distribusi',$obj);
+		if ($g) {
+			echo json_encode(array('status'=>true,'data'=>$obj));
+		}else{
+			echo json_encode(array('status'=>false,'data'=>$obj));
+		}
+	}
     function info()
     {
         if (!$this->ion_auth->logged_in())
@@ -85,5 +110,24 @@ class Distribusi extends CI_Controller {
     	$id = $this->input->get('no_bast_u');
         $data = $this->Dsitribusi_model->info($id);
         $this->load->view('views',['barang'=>$data]);
+    }
+
+    function edit()
+    {
+    	$date = $this->input->get('tanggal');
+        if (!$this->ion_auth->logged_in())
+        {
+            redirect(base_url('index.php/auth'));
+        }
+		$tgl_nya = $this->input->get('tgl_nya');
+		$type = $this->input->get('tgl');
+		if ($tgl_nya !='' || $type !='') {
+			$barang = $this->Dsitribusi_model->getbarang($tgl_nya,$type);
+		}else{
+	    	$barang = $this->Dsitribusi_model->getedit($date);
+		}
+		$g = $this->Dsitribusi_model->getedit($date);
+    	$this->load->view('template/template', ['template'=>'edit','tanggal'=>$date,'barang'=>$barang,'edit'=>$g]);
+    	// print_r($g->row());
     }
 }
