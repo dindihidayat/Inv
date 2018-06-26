@@ -171,6 +171,7 @@
 						if (data.status == true)
 						{
 							launch_toast();
+							location.href = "<?php echo base_url('index.php/stockopname/tambah') ?>"
 						}else{
 							failed();
 						}
