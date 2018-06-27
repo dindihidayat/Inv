@@ -91,8 +91,10 @@ class Upload extends CI_Controller {
 
 	            if ($check == "Pengajuan Barang") {
 		            $ins = $this->upload_model->insert('tb_pengajuan',$pengajuan);
-	            }else{
+	            }else if($check =="Master barang"){
 		            $ins = $this->upload_model->insert('mst_barang',$master_barang);
+	            }else{
+	            	echo json_encode(array('status'=>false,'pesan'=>"Terjadi Kesalahan"));
 	            }
 	            if ($ins) {
 	            	echo json_encode(array('status'=>true,'pesan'=>"Berhasil Menyimpan Data"));
