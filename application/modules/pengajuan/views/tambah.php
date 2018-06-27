@@ -239,7 +239,7 @@
         $('.yangada').hide();
       }
     })
-    // $('.datepicker').datepicker({format:'yyyy-mm-dd'})
+    $('.datepicker').datepicker({format:'yyyy-mm-dd'})
       CKEDITOR.replace('editor1',{
       on: {
             pluginsLoaded: function(event) {

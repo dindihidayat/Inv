@@ -17,7 +17,7 @@
 					<?php if ($barang->num_rows() > 0): ?>
 						<?php foreach ($barang->result() as $key): ?>
 							<tr>
-								<td><?php echo mediumdate_indo(substr($key->tgl_bast_u, 0,10)) ?></td>
+								<td><?php echo longdate_indo(substr($key->tgl_bast_u, 0,10)) ?></td>
 								<td><?php echo $key->no_bast_u ?></td>
 								<td><?php echo $key->penerima ?></td>
 								<td>

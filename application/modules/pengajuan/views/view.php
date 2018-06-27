@@ -43,7 +43,7 @@
             <?php if ($data->num_rows() > 0): ?>
               <?php foreach ($data->result() as $key): ?>
                 <tr>
-                  <td class="center" align="center"><?php if(substr($key->tgl_pengajuan, 0,10) == '0000-00-00'){echo 'Tanggal Tidak Valid <a class="btn btn-primary" data-toggle="modal" href="#mod-'.substr($key->tgl_pengajuan, 0,10).'">Trigger modal</a>';}else{echo mediumdate_indo(substr($key->tgl_pengajuan, 0,10));} ?>
+                  <td class="center" align="center"><?php if(substr($key->tgl_pengajuan, 0,10) == '0000-00-00'){echo 'Tanggal Tidak Valid <a class="btn btn-primary" data-toggle="modal" href="#mod-'.substr($key->tgl_pengajuan, 0,10).'">Trigger modal</a>';}else{echo longdate_indo(substr($key->tgl_pengajuan, 0,10));} ?>
                   <div class="modal fade" id="mod-<?php echo substr($key->tgl_pengajuan, 0,10) ?>">
                     <div class="modal-dialog">
                       <div class="modal-content">

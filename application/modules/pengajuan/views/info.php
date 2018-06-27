@@ -1,7 +1,22 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h3>Pengajuan Tanggal <?php echo longdate_indo(substr($data->row()->tgl_pengajuan, 0,10)) ?></h3>
+			<table class="table table-condensed" style="background: white">
+				<thead>
+					<tr>
+						<th class="text-center">Tanggal Pengajuan</th>
+						<th class="text-center">Kegiatan</th>
+						<th class="text-center">Program kerja</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-center"><?php echo longdate_indo(substr($data->row()->tgl_pengajuan, 0,10)) ?></td>
+						<td class="text-center"><?php echo $data->row()->kegiatan ?></td>
+						<td class="text-center"><?php echo $data->row()->prog_kerja ?></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<?php if ($data->num_rows() > 0): ?>
 			<?php foreach ($data->result() as $key): ?>
@@ -32,7 +47,7 @@
 
 						<!-- Tab panes -->
 						<div class="tab-content">
-						  <div role="tabpanel" class="tab-pane fade in active" id="profile<?php echo $key->id_barang ?>">
+						  <div role="tabpanel" class="tab-pane fade active" id="profile<?php echo $key->id_barang ?>">
 						  	<div class="table-responsive">
 						  	<table class="table table-condensed table-striped">
 						  		<thead>

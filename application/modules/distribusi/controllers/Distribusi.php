@@ -75,7 +75,7 @@ class Distribusi extends CI_Controller {
 				);
 			}
 		}
-		echo json_encode($obj);/
+		echo json_encode($obj);
 		$g = $this->Dsitribusi_model->insert('distribusi',$obj,'update',$tgl);
 		if ($g) {
 			echo json_encode(array('status'=>true,'data'=>$obj));
