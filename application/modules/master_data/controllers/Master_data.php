@@ -129,14 +129,14 @@ class Master_data extends MX_Controller {
     
     if ( ! $this->upload->do_upload('gambar')){
             $error = array('error' => $this->upload->display_errors());
-            print_r($error);
-            exit();
+            // print_r($error);
+            // exit();
     }
     else{
             $data = array('upload_data' => $this->upload->data());
             $gambar = $data['upload_data']['file_name'];
-            print_r($data);
-            exit();
+            // print_r($data);
+            // exit();
     }
     $id = $this->input->post('idnya');
     $barang = ['kodebarang'=>$this->Masterdata_model->kode(),
