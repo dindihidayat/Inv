@@ -59,47 +59,47 @@ class Upload extends CI_Controller {
 	            foreach ($objPHPExcel->getAllSheets() as $sheet) {
 	            $sheets[$sheet->getTitle()] = $sheet->toArray();
 	            }
-	            for ($i=1; $i <=sizeof($sheets) ; $i++) {
-                    $countnya[] = $sheets['Sheet'.$i];
-	                // if ($i >=10) {
-	                //     $countnya[] = $sheets['Sheet'.$i];
-	                // }
-	                // else{
-	                //     $countnya[] = $sheets['Sheet'.$i];
-	                // }
-	            }
+	            if (array_key_exists("Sheet1", $sheets)) {
+		            for ($i=1; $i <=sizeof($sheets) ; $i++) {
+	                    $countnya[] = $sheets['Sheet'.$i];
+		            }
 
-	            for ($i=0; $i <sizeof($countnya) ; $i++) { 
-	            	for ($d=3; $d <sizeof($countnya[$i]) ; $d++) {
-	            		if ($countnya[$i][0][1] == "Pengajuan Barang") {
-	            			$check = $countnya[$i][0][1];
-			            	$pengajuan[] = array('tgl_pengajuan'=>$countnya[$i][$d][1],'prog_kerja'=>$countnya[$i][$d][2],'kegiatan'=>$countnya[$i][$d][3],'pengajuan'=>$countnya[$i][$d][4],'id_barang'=>$countnya[$i][$d][5]);
-	            		}else{
-	            			$check = $countnya[$i][0][1];
-	            			$master_barang[] = array('id_barang'=>$countnya[$i][$d][0],
-	            									'nama'=>$countnya[$i][$d][1],
-	            									'satuan'=>$countnya[$i][$d][2],
-	            									'spesifikasi'=>$countnya[$i][$d][3],
-	            									'id_lokasi'=>1,
-	            									'sumber_dana'=>$countnya[$i][$d][5],
-	            									'quantity'=>$countnya[$i][$d][6],
-	            									'harga'=>$countnya[$i][$d][7],
-	            									'kodebarang'=>$countnya[$i][$d][8]);
-	            		}
-	            	}
-	            }
+		            for ($i=0; $i <sizeof($countnya) ; $i++) { 
+		            	for ($d=3; $d <sizeof($countnya[$i]) ; $d++) {
+		            		if ($countnya[$i][0][1] == "Pengajuan Barang") {
+		            			$check = $countnya[$i][0][1];
+				            	$pengajuan[] = array('tgl_pengajuan'=>$countnya[$i][$d][1],'prog_kerja'=>$countnya[$i][$d][2],'kegiatan'=>$countnya[$i][$d][3],'pengajuan'=>$countnya[$i][$d][4],'id_barang'=>$countnya[$i][$d][5]);
+		            		}else{
+		            			$check = $countnya[$i][0][1];
+		            			$master_barang[] = array('id_barang'=>$countnya[$i][$d][0],
+		            									'nama'=>$countnya[$i][$d][1],
+		            									'satuan'=>$countnya[$i][$d][2],
+		            									'spesifikasi'=>$countnya[$i][$d][3],
+		            									'id_lokasi'=>1,
+		            									'sumber_dana'=>$countnya[$i][$d][5],
+		            									'quantity'=>$countnya[$i][$d][6],
+		            									'harga'=>$countnya[$i][$d][7],
+		            									'kodebarang'=>$countnya[$i][$d][8]);
+		            		}
+		            	}
+		            }
 
-	            if ($check == "Pengajuan Barang") {
-		            $ins = $this->upload_model->insert('tb_pengajuan',$pengajuan);
-	            }else if($check =="Master barang"){
-		            $ins = $this->upload_model->insert('mst_barang',$master_barang);
+		            if ($check == "Pengajuan Barang") {
+			            $ins = $this->upload_model->insert('tb_pengajuan',$pengajuan);
+		            }else if($check =="Master barang"){
+			            $ins = $this->upload_model->insert('mst_barang',$master_barang);
+		            }else{
+		            	$ins = false;
+		            }
+		            if ($ins) {
+		            	echo json_encode(array('status'=>true,'pesan'=>"Berhasil Menyimpan Data"));
+		                unlink($inputFileName);
+		            }else{
+		            	echo json_encode(array('status'=>false,'pesan'=>"Gagal Menyimpan Data"));
+		                unlink($inputFileName);
+		            }
 	            }else{
-	            	echo json_encode(array('status'=>false,'pesan'=>"Terjadi Kesalahan"));
-	            }
-	            if ($ins) {
-	            	echo json_encode(array('status'=>true,'pesan'=>"Berhasil Menyimpan Data"));
-	            }else{
-	            	echo json_encode(array('status'=>false,'pesan'=>"Gagal Menyimpan Data"));
+	            	echo json_encode(array('status'=>false,'pesan'=>'Nama sheet harus Sheet...'));
 	                unlink($inputFileName);
 	            }
 

@@ -185,8 +185,8 @@
         <div class="col-md-12" style="padding:10px 10px 10px 10px">
           <a href="<?php echo base_url() ?>assets/file/template_pengajuan.xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Pengajuan</a>
           <a href="<?php echo base_url() ?>assets/file/template_Master_barang.xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Master Barang</a>
-          <a href="<?php echo base_url() ?>upload/file/JAWA_BARAT-BOGOR-BABAKAN_MADANG-BOJONG_KONENG-MODEL_A.3-KWK(Semua_TPS).xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Barang Datang</a>
-          <a href="<?php echo base_url() ?>upload/file/JAWA_BARAT-BOGOR-BABAKAN_MADANG-BOJONG_KONENG-MODEL_A.3-KWK(Semua_TPS).xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Stockopname</a>
+          <a href="javascript:;" class="btn btn-success" onclick="alert('Belum Ada Template')"><i class="fa fa-download"></i> Template Data Barang Datang</a>
+          <a href="javascript:;" class="btn btn-success" onclick="alert('Belum Ada Template')"><i class="fa fa-download"></i> Template Data Stockopname</a>
         </div>
 			</div>
 		</div>

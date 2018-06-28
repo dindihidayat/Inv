@@ -28,8 +28,8 @@
 					                    <div class="item-action dropdown">
 					                      <a href="javascript:void(0)" data-toggle="dropdown" class="icon" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
 					                      <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(15px, 20px, 0px); top: 0px; left: 0px; will-change: transform;">
-					                        <a href="<?php echo base_url('index.php/pengajuan/info/'.$key->id) ?>" class="dropdown-item"><i class="dropdown-icon fe fe-info"></i> Info </a>
-					                        <a href="<?php echo base_url('index.php/pengajuan/edit?tgl='.$key->id) ?>" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Edit </a>
+					                        <a href="javascript:;" class="dropdown-item"><i class="dropdown-icon fe fe-info"></i> Info </a>
+					                        <a href="javascript:;" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Edit </a>
 					                        <a href="javascript:;" class="dropdown-item hapus" data-tanggal="<?php echo $key->id ?>"><i class="dropdown-icon fe fe-trash"></i> Hapus</a>
 					                        <div class="dropdown-divider">
 					                        	
