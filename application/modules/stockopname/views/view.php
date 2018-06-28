@@ -30,9 +30,7 @@
 		                      <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(15px, 20px, 0px); top: 0px; left: 0px; will-change: transform;">
 		                        <a href="<?php echo base_url('index.php/stockopname/info/') ?>" class="dropdown-item btn btn-sm btn-info"><i class="dropdown-icon fe fe-info"></i> Info </a>
 		                        <a href="<?php echo base_url('index.php/stockopname/edit/') ?>" class="dropdown-item text-warning"><i class="dropdown-icon fe fe-edit-2 text-warning"></i> Edit </a>
-		                        <a href="<?php echo base_url('index.php/stockopname/trash/') ?>" class="dropdown-item text-danger"><i class="dropdown-icon fe fe-trash text-danger"></i> Hapus</a>
-		                        <!-- <div class="dropdown-divider"></div>
-		                        <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a> -->
+		                        <a href="javascript:;" data-id="<?php echo $key->tglopname ?>" class="dropdown-item text-danger hapus"><i class="dropdown-icon fe fe-trash text-danger"></i> Hapus</a>
 		                      </div>
 			                  </div>
 								</td>
@@ -45,3 +43,49 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(function()
+	{
+		$(document).on('click','.hapus',function()
+		{
+			var kode = $(this).data('id');
+			swal({
+			  title: 'Are you sure?',
+			  text: "You won't be able to revert this!",
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+			  if (result.value) {
+				$.ajax({
+					url:"<?php echo base_url('index.php/stockopname/hapus/') ?>",
+					data:{kode:kode},
+					method:"POST",
+					dataType:"JSON",
+					success:function(data)
+					{
+						if (data.status == true) {
+							swal({
+								type:"success",
+								title:"Berhasil Hapus Data",
+								 showConfirmButton:false,
+								timer:1500
+							});
+							location.href = "<?php echo base_url('index.php/stockopname') ?>";
+						}else{
+							swal({
+								type:"error",
+								title:"Gagal Menghapus Data",
+								 showConfirmButton:false,
+								timer:1500
+							});
+						}
+					}
+				});
+			  }
+			})
+		})
+	})
+</script>

@@ -73,6 +73,7 @@
           <div class="form-group">
             <label class="form-label">Gambar</label>
             <div class="custom-file">
+              <input type="hidden" name="gambar_lama" value="<?php echo $data->gambar ?>">
               <input type="file" class="custom-file-input" name="gambar" onchange="getFileData(this);">
               <label class="custom-file-label labelnya">Choose file</label>
             </div>

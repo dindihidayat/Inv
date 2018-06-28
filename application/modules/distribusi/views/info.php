@@ -1,18 +1,18 @@
 <div class="container-fluid">
-	<div class="col-md-6">
-		<table class="table table-condensed">
+	<div class="col-md-12">
+		<table class="table table-condensed" style="background: white">
 			<thead>
 				<tr>
-					<th>Tanggal Distribusi</th>
-					<th class="text-left">:</th>
-					<th><?php echo $data->row()->tgl_bast_u ?></th>
-				</tr>
-				<tr>
-					<th>Penanggung Jawab</th>
-					<th>:</th>
-					<th><?php echo $data->row()->penerima ?></th>
+					<th class="text-center">Tanggal Distribusi</th>
+					<th class="text-center">Penanggung Jawab</th>
 				</tr>
 			</thead>
+			<tbody>
+				<tr>
+					<td class="text-center"><?php echo $data->row()->tgl_bast_u ?></td>
+					<td class="text-center"><?php echo $data->row()->penerima ?></td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 	<div class="row">

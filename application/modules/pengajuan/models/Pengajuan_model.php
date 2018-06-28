@@ -10,7 +10,7 @@ class Pengajuan_model extends CI_Model {
 			$this->db->where('YEAR(tgl_pengajuan)', $tahun);
 		}
 		$this->db->group_by('DATE(tgl_pengajuan)');
-		$this->db->order_by('mst_barang.id_barang', 'ASC');
+		$this->db->order_by('DATE(tb_pengajuan.tgl_pengajuan)', 'DESC');
 		return $query = $this->db->get('tb_pengajuan',$number,$offset);		
 	}
 	function jumlah_data(){
@@ -41,7 +41,7 @@ class Pengajuan_model extends CI_Model {
 		$this->db->insert('mst_barang', $barang);
 		$id  = $this->db->insert_id();
 		if ($name['pengajuan'] == 'logistik') {
-			$this->db->insert('tb_pengajuan',array('tgl_pengajuan'=>$name['tgl_pengajuan'],'prog_kerja'=>$name['prog_kerja'],'kegiatan'=>$name['kegiatan'],'id_barang'=>$id,'pegnajuan'=>$name['pengajuan']));
+			$this->db->insert('tb_pengajuan',array('tgl_pengajuan'=>$name['tgl_pengajuan'],'prog_kerja'=>$name['prog_kerja'],'kegiatan'=>$name['kegiatan'],'id_barang'=>$id,'pengajuan'=>$name['pengajuan']));
 			
 		}else{
 			$this->db->insert('tb_pengajuan',array('tgl_pengajuan'=>$name['tgl_pengajuan'],'prog_kerja'=>$name['prog_kerja'],'kegiatan'=>$name['kegiatan'],'id_barang'=>$id,'pengajuan'=>$unit));

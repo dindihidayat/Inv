@@ -42,13 +42,13 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label>Kegiatan</label>
-						<input type="text" name="kegiatan" class="form-control kegiatan">
+						<input type="text" name="kegiatan" class="form-control kegiatan" value="<?php echo $dari_sispran->row()->kegiatan ?>">
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="form-group">
 						<label>Program Kerja</label>
-						<input type="text" name="prog_kerja" class="form-control prog_kerja">
+						<input type="text" name="prog_kerja" class="form-control prog_kerja" value="<?php echo $dari_sispran->row()->prog_kerja ?>">
 					</div>
 				</div>
 				<div class="col-md-3">

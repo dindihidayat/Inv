@@ -71,12 +71,27 @@ class Stockopname extends CI_Controller {
 		$no_opname = $this->input->post('no_opname');
 		$pic = $this->input->post('pic');
 
-
-		foreach (array_map(null, $barang,$kodebarang,$qty_prog,$qty_rill,$ket) as $key) {
-			list($barang_data,$kodebarang_data,$qty_prog_data,$qty_rill_data,$ket_data) = $key;
-			$object = array('no_opname'=>$no_opname,'kodebarang'=>$kodebarang_data,'namabarang'=>$barang_data,'jmlfisik'=>$qty_rill_data,'tglopname'=>$tgl_opname,'jmlprogram'=>$qty_prog_data,'selisih'=>$qty_prog_data-$qty_rill_data,'pic'=>$pic);
-			$g = $this->stockopname_model->insert('hasilstokopname',$object);
+		$count = $this->input->post('barang');
+		$ins = array();
+		foreach ($count as $key => $value) {
+			if ($_POST['qty_rill'][$key] != '') {
+				$ins[] =  array('no_opname'=>$no_opname,'kodebarang'=>$_POST['kodebarang'][$key],'namabarang'=>$_POST['barang'][$key],'jmlfisik'=>$_POST['qty_rill'][$key],'tglopname'=>$tgl_opname,'jmlprogram'=>$_POST['qty'][$key],'selisih'=>$_POST['qty'][$key]-$_POST['qty_rill'][$key],'pic'=>$pic);
+			}
 		}
+		// echo json_encode($ins);
+		// exit();
+		$g = $this->stockopname_model->insert('hasilstokopname',$ins);
+		if ($g) {
+			echo json_encode(array('status'=>true,'count'=>count($count)));
+		}else{
+			echo json_encode(array('status'=>false));
+		}
+	}
+
+	function hapus()
+	{
+		$id = $this->input->post('kode');
+		$g = $this->stockopname_model->hapus($id);
 		if ($g) {
 			echo json_encode(array('status'=>true));
 		}else{

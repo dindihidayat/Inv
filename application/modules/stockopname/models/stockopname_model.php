@@ -67,9 +67,29 @@ class Stockopname_model extends CI_Model {
 	}
 	function insert($tabel,$object)
 	{
-		return $this->db->insert($tabel, $object);
+		$this->db->trans_start();
+		$this->db->insert_batch($tabel, $object);
+		if ($this->db->trans_status()) {
+			$this->db->trans_commit();
+			return true;
+		}else{
+			$this->db->trans_rollback();
+			return false;
+		}
 	}
-
+	function hapus($id)
+	{
+		$this->db->trans_start();
+		$this->db->where('tglopname', $id);
+		$this->db->delete('hasilstokopname');
+		if ($this->db->trans_status()) {
+			$this->db->trans_commit();
+			return true;
+		}else{
+			$this->db->trans_rollback();
+			return false;
+		}
+	}
 }
 
 /* End of file stockopname_model.php */
