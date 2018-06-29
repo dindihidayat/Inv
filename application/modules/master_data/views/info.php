@@ -4,41 +4,49 @@
 			<h3>Info</h3>
 		</div>
 	</div>
-<pre>
-	<?php print_r($data->result()); ?>
-</pre>
 <div class="card">
 	<div class="col-md-12">
 		
 	<div class="row" style="padding:10px 10px 10px 10px">
 		<div class="col-md-3 col-xs-12">
-			<img src="<?php echo base_url('upload/gambar/'.$data->row()->gambar) ?>" style="width: 50%;height: 100%">
+			<?php if (sizeof($data->result()) > 0): ?>
+				
+			<?php if (!empty($data->row()->gambar)): ?>
+				<img src="<?php echo base_url('upload/gambar/'.$data->row()->gambar) ?>" style="width: 50%;height: 100%">
+			<?php endif ?>
+			<?php else: ?>
+				TIdak ada data yang ditampilkan
+			<?php endif ?>
 		</div>
 		<div class="col-md-6 col-xs-12">
+			<?php if (sizeof($data->result()) > 0): ?>
 			<h3><?php echo $data->row()->nama ?></h3>
-			<h5 class="text-info">Sumber Dana(<?php echo $data->row()->sumber_dana ?>), Lokasi <button type="button" class="btn btn-sm btn-info">Lihat lokasi Barang</button></h5>
+			<h5 class="text-info">Sumber Dana(<?php echo $data->row()->sumber_dana ?>), Lokasi(<?php echo $data->row()->lokasi ?>)</h5>
 			<h5 class="text-muted">Kode Barang <p><?php echo $data->row()->kodebarang ?></p></h5>
 			<h5 class="text-muted">Harga <p><?php echo $data->row()->harga ?></p></h5>
 			<h5 class="text-muted">Quantity <p><?php echo $data->row()->qty_datang ?></p></h5>
+			<?php else: ?>
+				Tidak Ada data yang ditampilkan
+			<?php endif ?>
 		</div>
 	</div>
 	<div class="row" style="padding:10px 10px 10px 10px">
 		<div class="col-md-12">
            <ul class="nav nav-tabs" role="tablist">
 			  <li class="nav-item">
-			    <a class="nav-link" href="#profile<?php echo $data->row()->id_barang ?>" role="tab" data-toggle="tab">Pengajuan</a>
+			    <a class="nav-link" href="#profile<?php if(sizeof($data->result()) > 0){echo $data->row()->id_barang;} ?>" role="tab" data-toggle="tab">Pengajuan</a>
 			  </li>
 			  <li class="nav-item">
-			    <a class="nav-link" href="#buzz<?php echo $data->row()->id_barang ?>" role="tab" data-toggle="tab">Data Datang Barang</a>
+			    <a class="nav-link" href="#buzz<?php if(sizeof($data->result()) > 0){echo $data->row()->id_barang;} ?>" role="tab" data-toggle="tab">Data Datang Barang</a>
 			  </li>
 			  <li class="nav-item">
-			    <a class="nav-link" href="#references<?php echo $data->row()->id_barang ?>" role="tab" data-toggle="tab">Data Distribusi</a>
+			    <a class="nav-link" href="#references<?php if(sizeof($data->result()) > 0){echo $data->row()->id_barang;} ?>" role="tab" data-toggle="tab">Data Distribusi</a>
 			  </li>
 			</ul>
 
 			<!-- Tab panes -->
 			<div class="tab-content">
-			  <div role="tabpanel" class="tab-pane fade active" id="profile<?php echo $data->row()->id_barang ?>">
+			  <div role="tabpanel" class="tab-pane fade active" id="profile<?php if(sizeof($data->result()) > 0){echo $data->row()->id_barang;}  ?>">
 			  	<div class="table-responsive">
 			  	<table class="table table-condensed table-striped">
 			  		<thead>
@@ -50,17 +58,24 @@
 			  			</tr>
 			  		</thead>
 			  		<tbody>
+			  			<?php if (sizeof($data->result()) > 0): ?>
+			  				
 			  			<tr>
 			  				<td><?php echo $data->row()->tgl_pengajuan ?></td>
 			  				<td><?php echo $data->row()->prog_kerja ?></td>
 			  				<td><?php echo $data->row()->kegiatan ?></td>
 			  				<td><?php echo $data->row()->pengajuan ?></td>
 			  			</tr>
+			  			<?php else: ?>
+			  				<tr>
+			  					<td class="text-center" colspan="4">Tidak ada data yang ditampilkan</td>
+			  				</tr>
+			  			<?php endif ?>
 			  		</tbody>
 			  	</table>
 			  	</div>
 			  </div>
-			  <div role="tabpanel" class="tab-pane fade" id="buzz<?php echo $data->row()->id_barang ?>">
+			  <div role="tabpanel" class="tab-pane fade" id="buzz<?php if(sizeof($data->result()) > 0){echo $data->row()->id_barang;} ?>">
 				<table class="table table-condensed">
 					<thead>
 						<tr>
@@ -73,8 +88,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php if (!empty($data->row()->tgl_datang)): ?>
+						<?php if (sizeof($data->result()) > 0): ?>
 							
+						<?php if (!empty($data->row()->tgl_datang)): ?>
 						<?php if ($data->num_rows() > 0): ?>
 							<?php foreach ($data->result() as $key): ?>
 								<tr>
@@ -92,10 +108,15 @@
 								<td class="text-center" colspan="6">Barang Belum Datang</td>
 							</tr>
 						<?php endif ?>
+						<?php else: ?>
+							<tr>
+								<td class="text-center" colspan="6">Tidak Ada data yang ditampilkan</td>
+							</tr>
+						<?php endif ?>
 					</tbody>
 				</table>
 			  </div>
-			  <div role="tabpanel" class="tab-pane fade" id="references<?php echo $data->row()->id_barang ?>">
+			  <div role="tabpanel" class="tab-pane fade" id="references<?php if(sizeof($data->result()) > 0){$data->row()->id_barang;}  ?>">
 				<table class="table table-condensed">
 					<thead>
 						<tr>
@@ -106,6 +127,7 @@
 						</tr>
 					</thead>
 					<tbody>
+						<?php if (sizeof($data->result()) > 0): ?>
 						<?php if (!empty($data->row()->qty_distribusi)): ?>
 							<?php if ($data->num_rows() > 0): ?>
 								<?php foreach ($data->result() as $key): ?>
@@ -122,10 +144,15 @@
 									<td class="text-center" colspan="4">Barang Belum Di Realisasikan</td>
 								</tr>
 						<?php endif ?>
+						<?php else: ?>
+								<tr>
+									<td class="text-center" colspan="4">Barang Belum Di Realisasikan</td>
+								</tr>
+						<?php endif ?>
 					</tbody>
 				</table>
 			  </div>
-			  <div role="tabpanel" class="tab-pane fade" id="lokasi<?php echo $data->row()->id_barang ?>">
+			  <div role="tabpanel" class="tab-pane fade" id="lokasi<?php if(sizeof($data->result()) > 0){echo $data->row()->id_barang;} ?>">
 			  	Lokasi : <span class="text-info"><strong>Gudang DSTI</strong></span>	
 			  </div>
 			</div>
