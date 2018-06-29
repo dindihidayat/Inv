@@ -99,7 +99,9 @@ class Masterdata_model extends CI_Model {
 		$this->db->join('distribusi dis', 'dis.id_barang = tb.id_barang', 'left');
 		$this->db->join('mst_barang ms', 'ms.id_barang = tb.id_barang', 'left');
 		$this->db->join('lokasi', 'lokasi.id = ms.id_lokasi', 'left');
-		return $this->db->get('tb_pengajuan tb');
+		$g = $this->db->get('tb_pengajuan tb');
+		// $g = $this->db->last_query();
+		return $g;
 	}
 
 }

@@ -6,11 +6,9 @@
 	</div>
 <div class="card">
 	<div class="col-md-12">
-		
 	<div class="row" style="padding:10px 10px 10px 10px">
 		<div class="col-md-3 col-xs-12">
 			<?php if (sizeof($data->result()) > 0): ?>
-				
 			<?php if (!empty($data->row()->gambar)): ?>
 				<img src="<?php echo base_url('upload/gambar/'.$data->row()->gambar) ?>" style="width: 50%;height: 100%">
 			<?php endif ?>
@@ -22,9 +20,13 @@
 			<?php if (sizeof($data->result()) > 0): ?>
 			<h3><?php echo $data->row()->nama ?></h3>
 			<h5 class="text-info">Sumber Dana(<?php echo $data->row()->sumber_dana ?>), Lokasi(<?php echo $data->row()->lokasi ?>)</h5>
-			<h5 class="text-muted">Kode Barang <p><?php echo $data->row()->kodebarang ?></p></h5>
-			<h5 class="text-muted">Harga <p><?php echo $data->row()->harga ?></p></h5>
-			<h5 class="text-muted">Quantity <p><?php echo $data->row()->qty_datang ?></p></h5>
+			<h5 class="">Kode Barang <p><?php echo $data->row()->kodebarang ?></p></h5>
+			<h5 class="">Harga <p>Rp.<?php echo number_format($data->row()->harga) ?></p></h5>
+			<?php $f = array();foreach ($data->result() as $value): ?>
+				<?php $f[] = $value->qty_distribusi ?>
+			<?php endforeach ?>
+			<?php $g = array_sum($f) ?>
+			<h5 class="">Quantity <p><strong><?php echo $data->row()->qty_datang-$g ?></strong> dari <strong><?php echo $data->row()->qty_datang ?></strong></p></h5>
 			<?php else: ?>
 				Tidak Ada data yang ditampilkan
 			<?php endif ?>
@@ -116,7 +118,7 @@
 					</tbody>
 				</table>
 			  </div>
-			  <div role="tabpanel" class="tab-pane fade" id="references<?php if(sizeof($data->result()) > 0){$data->row()->id_barang;}  ?>">
+			  <div role="tabpanel" class="tab-pane fade" id="references<?php if(sizeof($data->result()) > 0){echo $data->row()->id_barang;} ?>">
 				<table class="table table-condensed">
 					<thead>
 						<tr>

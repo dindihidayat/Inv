@@ -174,10 +174,7 @@ class Master_data extends MX_Controller {
   function info($id)
   {
     $g = $this->Masterdata_model->info($id);
-    // echo '<pre>';
-    // print_r($g->result());
-    // echo '</pre>';
-    // exit();
+    // echo $g;
     $this->load->view('template/template', ['template'=>'info','data'=>$g]);
   }
 }
