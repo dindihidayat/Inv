@@ -15,14 +15,16 @@ class Pengajuan extends MX_Controller {
             redirect(base_url('index.php/auth'));
         }
             $tahun = 0;
+            $pengajuan = '';
+            $pengajuan = $this->input->get('pengajuan');
             $tahun = $this->input->get('tahun');
             $jumlah_data = $this->pengajuan_model->jumlah_data();
             $config['base_url'] = site_url('index.php').'/pengajuan/index/';
             $config['total_rows'] = $jumlah_data;
             $config['per_page'] = 10;
             $from = $this->uri->segment(4);
-            if (!empty($tahun)) {
-                $datanya = $this->pengajuan_model->data($config['per_page'],$from,$tahun);
+            if (!empty($tahun) || !empty($pengajuan)) {
+                $datanya = $this->pengajuan_model->data($config['per_page'],$from,$tahun,$pengajuan);
             }else{
                 $datanya = $this->pengajuan_model->data($config['per_page'],$from);
             }

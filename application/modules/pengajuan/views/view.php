@@ -21,6 +21,7 @@
                   <option value="2016">2016</option>
                   <option value="2015">2015</option>
                 </select>
+                <input type="text" name="pengajuan" class="form-control" placeholder="Pengajuan">
                 <div class="input-group-btn">
                   <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
                 </div>
@@ -35,6 +36,7 @@
               <th>Tanggal Pengajuan</th>
               <th>Jumlah Barang</th>
               <th class="text-center">Total Harga</th>
+              <th class="text-center">Yang Mengajukan</th>
               <th class="text-center">Act</th>
               <!-- <th class="text-center"><i class="icon-settings"></i></th> -->
             </tr>
@@ -74,6 +76,7 @@
                   </td>
                   <td class="center" align="center"><?php echo $key->count ?></td>
                   <td class="center" align="center"><?php echo $key->quantity * 120000 ?></td>
+                  <td class="center" align="center"><?php echo $key->peng ?></td>
                   <td class="center" align="center">
                     <div class="item-action dropdown">
                       <a href="javascript:void(0)" data-toggle="dropdown" class="icon" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>

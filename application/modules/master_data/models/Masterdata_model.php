@@ -91,6 +91,17 @@ class Masterdata_model extends CI_Model {
 		}
 	}
 
+	function info($id)
+	{
+		$this->db->select('td.no_bst,tgl_bst,no_po,pic,tgl_datang,dis.tgl_bast_u,dis.no_bast_u,qty,dis.qty as qty_distribusi,dis.penerima,lokasi.lokasi,tb.prog_kerja,tb.kegiatan,tb.pengajuan,DATE(tb.tgl_pengajuan) as tgl_pengajuan,nama,gambar,sumber_dana,quantity,harga,kodebarang,qty_datang,td.id_barang');
+		$this->db->where('tb.id_barang', $id);
+		$this->db->join('tb_datang td', 'td.id_barang = tb.id_barang', 'left');
+		$this->db->join('distribusi dis', 'dis.id_barang = tb.id_barang', 'left');
+		$this->db->join('mst_barang ms', 'ms.id_barang = tb.id_barang', 'left');
+		$this->db->join('lokasi', 'lokasi.id = ms.id_lokasi', 'left');
+		return $this->db->get('tb_pengajuan tb');
+	}
+
 }
 
 /* End of file Pengajuan_model.php */

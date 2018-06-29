@@ -3,11 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pengajuan_model extends CI_Model {
 
-	function data($number,$offset,$tahun = ''){
-		$this->db->select('tb_pengajuan.*,mst_barang.*,count(tb_pengajuan.id_barang) as count');
+	function data($number,$offset,$tahun = '',$pengajuan = ''){
+		$this->db->select('tb_pengajuan.*,mst_barang.*,count(tb_pengajuan.id_barang) as count,tb_pengajuan.pengajuan as peng');
 		$this->db->join('mst_barang', 'mst_barang.id_barang = tb_pengajuan.id_barang');
-		if (!empty($tahun)) {
+		if (!empty($tahun) || !empty($pengajuan)) {
 			$this->db->where('YEAR(tgl_pengajuan)', $tahun);
+			$this->db->like('tb_pengajuan.pengajuan', $pengajuan, 'BOTH');
 		}
 		$this->db->group_by('DATE(tgl_pengajuan)');
 		$this->db->order_by('DATE(tb_pengajuan.tgl_pengajuan)', 'DESC');

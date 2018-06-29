@@ -171,4 +171,13 @@ class Master_data extends MX_Controller {
       $this->tambah();
     }
   }
+  function info($id)
+  {
+    $g = $this->Masterdata_model->info($id);
+    // echo '<pre>';
+    // print_r($g->result());
+    // echo '</pre>';
+    // exit();
+    $this->load->view('template/template', ['template'=>'info','data'=>$g]);
+  }
 }
