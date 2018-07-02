@@ -97,7 +97,7 @@
 									<tr>
 										<td><input type="hidden" name="kodebarang[]" value="<?php echo $key->kodebarang ?>"><?php echo $key->kodebarang ?></td>
 										<td><input type="hidden" name="barang[]" value="<?php echo $key->nama ?>"><?php echo $key->nama ?></td>
-										<td><input type="hidden" name="qty[]" value="<?php if($key->qty_datang){echo $key->qty_datang;}else{echo 'Barang ini masild dalah proses pengajuan';}?>"><?php if($key->qty_datang){echo $key->qty_datang;}else{echo 'Barang ini masild dalah proses pengajuan';}?></td>
+										<td><input type="hidden" name="qty[]" value="<?php if($key->qty_datang){echo $key->qty_datang;}else{echo 'Barang ini masih dalah proses pengajuan';}?>"><?php if($key->qty_datang){echo $key->qty_datang;}else{echo 'Barang ini masih dalah proses pengajuan';}?></td>
 										<td><input type="number" name="qty_rill[]" class="form-control" placeholder="Quantity Rill"></td>
 										<td>
 											<div class="form-group">
