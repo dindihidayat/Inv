@@ -186,7 +186,7 @@
           <a href="<?php echo base_url() ?>assets/file/template_pengajuan.xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Pengajuan</a>
           <a href="<?php echo base_url() ?>assets/file/template_Master_barang.xlsx" class="btn btn-success" download><i class="fa fa-download"></i> Template Data Master Barang</a>
           <a href="javascript:;" class="btn btn-success" onclick="alert('Belum Ada Template')"><i class="fa fa-download"></i> Template Data Barang Datang</a>
-          <a href="javascript:;" class="btn btn-success" onclick="alert('Belum Ada Template')"><i class="fa fa-download"></i> Template Data Stockopname</a>
+          <a href="<?php echo base_url() ?>assets/file/template_stockopname.xlsx" class="btn btn-success"><i class="fa fa-download"></i> Template Data Stockopname</a>
         </div>
 			</div>
 		</div>

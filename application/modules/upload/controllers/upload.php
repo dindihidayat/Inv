@@ -69,7 +69,7 @@ class Upload extends CI_Controller {
 		            		if ($countnya[$i][0][1] == "Pengajuan Barang") {
 		            			$check = $countnya[$i][0][1];
 				            	$pengajuan[] = array('tgl_pengajuan'=>$countnya[$i][$d][1],'prog_kerja'=>$countnya[$i][$d][2],'kegiatan'=>$countnya[$i][$d][3],'pengajuan'=>$countnya[$i][$d][4],'id_barang'=>$countnya[$i][$d][5]);
-		            		}else{
+		            		}elseif($countnya[$i][0][1] == "Master Barang"){
 		            			$check = $countnya[$i][0][1];
 		            			$master_barang[] = array('id_barang'=>$countnya[$i][$d][0],
 		            									'nama'=>$countnya[$i][$d][1],
@@ -80,6 +80,8 @@ class Upload extends CI_Controller {
 		            									'quantity'=>$countnya[$i][$d][6],
 		            									'harga'=>$countnya[$i][$d][7],
 		            									'kodebarang'=>$countnya[$i][$d][8]);
+		            		}elseif($countnya[$i][0][1] == "Master Barang"){
+
 		            		}
 		            	}
 		            }
@@ -113,10 +115,8 @@ class Upload extends CI_Controller {
 
 	function while_do()
 	{
-		$i = 1;
-		while ($i <= 10) {
-			echo $i++;
-		}
+		$g = array('1'=>'Dindi','2'=>'Hidayat');
+		print_r($g['1']);
 	}
 }
 
